@@ -10,18 +10,6 @@ spec:
     namespace: rabbitmq
 ---
 apiVersion: rabbitmq.com/v1beta1
-kind: User
-metadata:
-  name: notifications-svc-user
-  namespace: notifications-system
-spec:
-  rabbitmqClusterReference:
-    name: rabbitmq-prod
-    namespace: rabbitmq
-  importCredentialsSecret:
-    name: notifications-svc-credentials
----
-apiVersion: rabbitmq.com/v1beta1
 kind: Permission
 metadata:
   name: notifications-svc-permission
@@ -30,7 +18,7 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq-prod
     namespace: rabbitmq
-  user: notifications-svc-user
+  user: notifications-svcuser.rabbitmq.svc.cluster.local
   vhost: vhost_notifications
   permissions:
     configure: ".*"

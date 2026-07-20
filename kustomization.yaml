@@ -4,5 +4,5 @@ namespace: notifications-system
 
 resources:
 - namespace.yaml
-- vault-static-secret.yaml
 - topology.yaml
+- vault-pki-secret.yaml

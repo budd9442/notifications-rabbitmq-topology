@@ -9,6 +9,28 @@ spec:
     name: rabbitmq-prod
     namespace: rabbitmq
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: notifications-svcuser-credentials
+  namespace: notifications-system
+type: Opaque
+stringData:
+  username: notifications-svcuser.rabbitmq.svc.cluster.local
+  passwordHash: ""
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: notifications-svcuser
+  namespace: notifications-system
+spec:
+  rabbitmqClusterReference:
+    name: rabbitmq-prod
+    namespace: rabbitmq
+  importCredentialsSecret:
+    name: notifications-svcuser-credentials
+---
 apiVersion: rabbitmq.com/v1beta1
 kind: Permission
 metadata:
